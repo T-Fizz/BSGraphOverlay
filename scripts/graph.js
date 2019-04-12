@@ -1,8 +1,10 @@
 //create date object of current time
 var startTime = new Date();
 
-var songTitle = 'Song Name Goes Here'
-
+var player = "TFizz";
+var songTitle = 'Song Name Goes Here';
+var mapper = 'Mapper Goes Here';
+var totalScore = 9999999;
 //graph data
 var accs = [];
 var times = [];
@@ -55,8 +57,11 @@ var myChart = new Chart(ctx, {
     }
 });
 
-function setSongData() {
-
+function setGraphData() {
+    document.getElementById('chartHeader').innerHTML = songTitle;
+    document.getElementById('player').innerHTML = "Player: " + player;
+    document.getElementById('mapper').innerHTML = "Mapper: " + mapper;
+    document.getElementById('score').innerHTML = "Score: " + totalScore;
 }
 
 function timer() {
@@ -98,6 +103,7 @@ function updateGraph() {
     myChart.update();
 }
 
+//setGraphData();
 updateGraph();
 var graphUpdate = setInterval(updateGraph, 1000);
 /*
