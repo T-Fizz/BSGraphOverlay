@@ -7,11 +7,19 @@
 }
 
 body {
-    background-color: rgba(58, 58, 58, 0.0);
+    background-color: rgba(95, 95, 95, 0);
 }
 
-#chartHeader {
-    position: relative;
+#chartContainer {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 100px;
+}
+
+#chartTitle {
+    position: absolute;
+    width: 500px;
     text-align: center;
     font-family: BeonMedium, 'Times New Roman', Times, serif;
     font-size: 32px;
@@ -21,13 +29,12 @@ body {
 #chartData {
     width: 500px;
     min-height: 60px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #mapper {
-    /*position: absolute;*/
+    position: absolute;
     width: 500px;
+    top: 45px;
     min-height: 35px;
     text-align: center;
     font-family: BeonMedium, 'Times New Roman', Times, serif;
@@ -36,14 +43,16 @@ body {
 }
 
 #playerData {
-    width: 450px;
+    position: absolute;
+    top: 75px;
+    width: 500px;
     min-height: 25px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #player {
-    /*position: absolute;*/
+    position: relative;
     width: 49.5%;
     float: left;
     text-align: left;
@@ -53,7 +62,7 @@ body {
 }
 
 #score {
-    /*position: absolute;*/
+    position: relative;
     width: 49.5%;
     float: right;
     text-align: right;

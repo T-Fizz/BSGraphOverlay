@@ -58,7 +58,7 @@ var myChart = new Chart(ctx, {
 });
 
 function setGraphData() {
-    document.getElementById('chartHeader').innerHTML = songTitle;
+    document.getElementById('chartTitle').innerHTML = songTitle;
     document.getElementById('player').innerHTML = "Player: " + player;
     document.getElementById('mapper').innerHTML = "Mapper: " + mapper;
     document.getElementById('score').innerHTML = "Score: " + totalScore;
@@ -103,7 +103,7 @@ function updateGraph() {
     myChart.update();
 }
 
-//setGraphData();
+setGraphData();
 updateGraph();
 var graphUpdate = setInterval(updateGraph, 1000);
 /*
