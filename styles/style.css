@@ -53,11 +53,27 @@ body {
 }
 
 #score {
-    /*position: absolute;*/
-    width: 4100%;
-    float: right;
+    position: relative;
+    font-size: 25;
+    float: left;
+    top: 500px;
+    width: 90%;
+    height: 200px;
+    left: 260px;
+    background-color: beige;
+    opacity: 25%;
+    float: bottom;
     text-align: right;
     font-family: BeonMedium, 'Times New Roman', Times, serif;
     font-size: 12px;
+    color: red;
+    border-style: solid;
+    border-width: 2px 10px 4px 20px;
+    z-index: -2;
+}
+p.makeMyTextLookGoodSam{
+    text-align: center;
+    font-family: BeonMedium, 'Times New Roman', Times, serif;
+    font-size: 32px;
     color: red;
 }
