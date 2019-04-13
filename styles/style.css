@@ -11,10 +11,14 @@ body {
 }
 
 #chartContainer {
+    display: block;
+}
+
+#chart {
     position: absolute;
     width: 500px;
     height: 500px;
-    top: 100px;
+    top: 90px;
 }
 
 #chartTitle {
@@ -28,32 +32,33 @@ body {
 
 #chartData {
     width: 500px;
-    min-height: 60px;
+    min-height: 56px;
 }
 
 #mapper {
     position: absolute;
     width: 500px;
     top: 45px;
-    min-height: 35px;
+    min-height: 30px;
     text-align: center;
     font-family: BeonMedium, 'Times New Roman', Times, serif;
-    font-size: 20px;
+    font-size: 16px;
     color: red;
 }
 
 #playerData {
     position: absolute;
-    top: 75px;
-    width: 500px;
-    min-height: 25px;
+    top: 66px;
+    left: 26px;
+    width: 460px;
+    min-height: 16px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #player {
-    position: relative;
-    width: 49.5%;
+    position: absolute;
+    width: 33.3%;
     float: left;
     text-align: left;
     font-family: BeonMedium, 'Times New Roman', Times, serif;
@@ -61,9 +66,20 @@ body {
     color: red;
 }
 
+#difficulty {
+    position: absolute;
+    width: 33.3%;
+    left: 33.3%;
+    text-align: center;
+    font-family: BeonMedium, 'Times New Roman', Times, serif;
+    font-size: 12px;
+    color: red;
+}
+
 #score {
-    position: relative;
-    width: 49.5%;
+    position: absolute;
+    width: 33.3%;
+    left: 66.6%;
     float: right;
     text-align: right;
     font-family: BeonMedium, 'Times New Roman', Times, serif;

@@ -9,18 +9,24 @@
 </head>
 
 <body>
-    <div id="chartTitle">Song name goes here</div>
-    <div id="chartData">
-        <div id="mapper"></div>
+    <div id="chartContainer">
+        <div id="chartData">
+            <div id="chartTitle"></div>
+            <div id="mapper"></div>
+        </div>
         <div id="playerData">
             <div id="player"></div>
+            <div id="difficulty"></div>
             <div id="score"></div>
         </div>
+        <div id="chart">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
     </div>
-    <div id="chartContainer">
-        <canvas id="myChart" width="400" height="400"></canvas>
-    </div>
+    <script src="/scripts/options.js"></script>
     <script src="/scripts/graph.js"></script>
+    <script src="/scripts/manager.js"></script>
+    <script src="/scripts/beatsaber.js"></script>
 </body>
 
 </html>

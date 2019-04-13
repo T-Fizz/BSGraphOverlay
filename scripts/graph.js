@@ -1,140 +1,143 @@
-//create date object of current time
-var startTime = new Date();
+let socket;
 
-var player = "TFizz";
-var songTitle = 'Song Name Goes Here';
-var mapper = 'Mapper Goes Here';
-var totalScore = 9999999;
-//graph data
-var accs = [];
-var times = [];
-var time = '';
-var minutes = 0;
-var seconds = 0;
-//graph
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: times,
-        datasets: [{
-            data: accs,
-            pointRadius: 0,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.0)'
-            ],
-            borderColor: [
-                'red'
-            ],
-            borderWidth: 3
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        },
-        scales: {
-            xAxes: [{
-                ticks: {
-                    padding: 4,
-                    fontColor: 'rgb(220, 0, 0, 0.5)',
-                    beginAtZero: true,
-                    max: (minutes * 60) + seconds,
-                },
-                gridLines: [{
-                    drawTicks: true,
-                    display: false,
-                }],
-            }],
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 100,
-                    fontColor: 'rgb(220, 0, 0, 0.8)'
-                }
+const graph = (() => {
+    var accs = [];
+    var minutes = [];
+    var seconds = [];
+    var times = [];
+
+    var main = document.getElementById('chartContainer');
+    var ctx = document.getElementById('myChart');
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: this.performance.times,
+            datasets: [{
+                data: this.performance.accs,
+                pointRadius: 0,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.0)'
+                ],
+                borderColor: [
+                    'red'
+                ],
+                borderWidth: 3
             }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        padding: 4,
+                        fontColor: 'rgb(220, 0, 0, 0.5)',
+                        beginAtZero: true,
+                        max: this.performance.times ? 0 : this.performance.times[times.length - 1],
+                    },
+                    gridLines: [{
+                        drawTicks: true,
+                        display: false,
+                    }],
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        fontColor: 'rgb(220, 0, 0, 0.8)'
+                    }
+                }]
+            }
         }
+    });
+
+    const performance = (() => {
+        var score = document.getElementById('score');
+        var accs = [1, 2, 3]
+        var times = [1, 2, 3];
+
+        function updateChart() {
+            accs.push((data.currentMaxScore > 0) ? (data.score / data.currentMaxScore) * 100 : 100);
+            times.push(format(Date.now() - time));
+        }
+        return (data) => {
+            totalScore = data.score;
+            score.innerHTML = `Score: ${totalScore}`;
+        }
+    })();
+
+    const timer = (() => {
+        var active = false;
+        var start;
+        var end;
+        var duration;
+        var display;
+
+        function format(time) {
+            var minutes = Math.floor(seconds / 60);
+            var seconds = time % 60;
+            return (seconds > 10) ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
+        }
+
+        function update(time) {
+            time = time || Date.now();
+            var diff = time - start;
+            var diffInSeconds = diff / 1000;
+            if (diffInSeconds != display) {
+                display = diffInSeconds;
+            }
+        }
+
+        function loop() {
+            if (active) {
+                update();
+                requestAnimationFrame(loop);
+            }
+        }
+
+        return {
+            start(time, length) {
+                active = true;
+                start = time;
+                duration = length;
+                loop();
+            },
+
+            pause(time) {
+                active = false;
+                date(time);
+            },
+
+            stop() {
+                active = false;
+                start = undefined;
+                duration = undefined;
+            }
+        }
+    })();
+    const beatmap = (() => {
+        var title = document.getElementById('chartTitle');
+        var subtitle = document.getElementById('mapper');
+        var difficulty = document.getElementById('difficulty');
+        return (data, time) => {
+            if (data.diffculty === "ExpertPlus") { data.diffculty = "Expert+ "; }
+            title.innerHTML = data.songName;
+            subtitle.innerHTML = data.songSubName;
+            difficulty.innerHTML = data.diffculty;
+            timer.start(Date.now(), data.length);
+        }
+    })();
+    return {
+        show() {
+            main.style.display = 'block';
+        },
+        hide() {
+            main.style.display = 'none';
+        },
+        performance,
+        timer,
+        beatmap
     }
-});
-
-function setGraphData() {
-    document.getElementById('chartTitle').innerHTML = songTitle;
-    document.getElementById('player').innerHTML = "Player: " + player;
-    document.getElementById('mapper').innerHTML = "Mapper: " + mapper;
-    document.getElementById('score').innerHTML = "Score: " + totalScore;
-}
-
-function timer() {
-    var endTime = new Date();
-    seconds = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
-    delete endTime;
-    if (seconds >= 60) {
-        let mod = seconds % 60;
-        minutes = (seconds - mod) / 60;
-        seconds = 0;
-    }
-    if (seconds < 10) { time = time = minutes.toString() + ':0' + seconds.toString(); } else { time = minutes.toString() + ':' + seconds.toString(); }
-    return time;
-}
-
-function getAcc() {
-    return (20 * Math.random() + 70);
-}
-
-function updateGraph() {
-    //convert time from seconds to a printable time format
-    let t = timer();
-    let a = getAcc();
-    console.log("Time: " + t);
-    console.log("Acc: " + a);
-    times.push(t);
-    accs.push(a);
-    myChart.update();
-}
-
-function updateGraph() {
-    //convert time from seconds to a printable time format
-    let t = timer();
-    let a = getAcc();
-    console.log("Time: " + t);
-    console.log("Acc: " + a);
-    times.push(t);
-    accs.push(a);
-    myChart.update();
-}
-
-setGraphData();
-updateGraph();
-var graphUpdate = setInterval(updateGraph, 1000);
-/*
-setInterval(function() {
-    //convert time from seconds to a printable time format
-    console.log(timer());
-    times.push(timer());
-    accs.push(genAcc());
-    myChart.update();
-}, 1000);
-//add data to graph
-//window.setInterval(updateGraph(myChart, timer(), genAcc(), 50));
-*/
-
-/*
-for (var i = 0; i <= 100; i++) {
-    accs.push((Math.random() * 15) + 70);
-
-    if (seconds < 10) {
-        time = minutes.toString() + ":" + "0" + seconds.toString();
-    } else {
-        time = minutes.toString() + ":" + seconds.toString();
-    }
-
-    times.push(time);
-    console.log(time);
-
-    seconds += 5;
-    if (seconds === 60) {
-        minutes++;
-        seconds = 0;
-    }
-}
-*/
+})();
