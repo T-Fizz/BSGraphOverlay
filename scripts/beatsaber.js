@@ -5,21 +5,43 @@ const events = {
         console.log(name);
     },
     songStart(data, time) {
-        setBeatmapInfo(data.beatmap);
+        console.log(data);
         graph.beatmap(data.beatmap, time);
-        graph.performance(data.performance);
+        graph.performance.update(data.performance);
+        console.log(graph.timer.push());
+        graph.timer.push()
         graph.show();
     },
 
     finish(data, time) {
-        graph.performance(data.performance);
+        graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
-    noteCut(data, time) { graph.performance(data.performance); },
-    noteFullyCut(data, time) { graph.performance(data.performance); },
-    obstacleEnter(data, time) { graph.performance(data.performance); },
-    noteMissed(data, time) { graph.performance(data.performance); },
-    bombCut(data, time) { graph.performance(data.performance); },
+    noteCut(data, time) {
+        graph.performance.update(data.performance);
+        graph.timer.push();
+    },
+
+    noteFullyCut(data, time) {
+        graph.performance.update(data.performance);
+        graph.timer.push();
+    },
+
+    obstacleEnter(data, time) {
+        graph.performance.update(data.performance);
+        graph.timer.push();
+    },
+
+    noteMissed(data, time) {
+        graph.performance.update(data.performance);
+        graph.timer.push();
+    },
+
+    bombCut(data, time) {
+        graph.performance.update(data.performance);
+        graph.timer.push();
+    },
 
     pause(data, time) {
         graph.timer.pause(data.beatmap.paused + (Date.now() - time));
@@ -31,5 +53,6 @@ const events = {
 
     menu() {
         graph.timer.stop();
+        graph.performance.clear();
     }
 };
