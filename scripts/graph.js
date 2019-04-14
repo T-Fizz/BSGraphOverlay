@@ -39,6 +39,7 @@ const graph = (() => {
 
     const timer = (() => {
         var active = false;
+        var round = false;
         var times = [];
         var start;
         var duration;
@@ -71,8 +72,14 @@ const graph = (() => {
                 times = [];
             },
             push() {
-                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display)) {
+                //round off time and pushs at most once each second
+                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display) && round) {
                     times.push(format(display));
+                    myChart.data.labels = times;
+                    myChart.update();
+                    numberOfTimes++;
+                } else if (myChart.data.labels[myChart.data.labels.length - 1] !== (display)) { //don't round off and don't limit push rate
+                    times.push((display));
                     myChart.data.labels = times;
                     myChart.update();
                     numberOfTimes++;
@@ -138,6 +145,13 @@ const graph = (() => {
         player
     }
 })();
+var defaultColor = 'white';
+
+var colorPick = prompt(`Please enter a color you would like your graph to be, default is ${defaultColor}\nSee readme for more info on color choices`, 'white');
+
+var lineColor = new RGBColor(colorPick).toHex();
+var xColor = lineColor;
+var yColor = lineColor;
 
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -149,7 +163,7 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 99, 132, 0.0)'
             ],
             borderColor: [
-                'rgb(180, 0, 255)'
+                lineColor
             ],
             borderWidth: 3
         }]
@@ -165,8 +179,9 @@ var myChart = new Chart(ctx, {
             xAxes: [{
                 ticks: {
                     padding: 4,
-                    fontColor: 'rgb(180, 0, 255)',
+                    fontColor: xColor,
                     fontFamily: 'Lucida Console',
+                    fontSize: 1,
                     beginAtZero: true,
                     min: 0
                 },
@@ -178,8 +193,9 @@ var myChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     max: 100,
-                    fontColor: 'rgb(180, 0, 255)',
-                    fontFamily: 'Lucida Console'
+                    fontColor: yColor,
+                    fontFamily: 'Lucida Console',
+                    fontSize: 14
                 }
             }]
         }
