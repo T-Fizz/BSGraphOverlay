@@ -15,10 +15,10 @@ body {
 }
 
 #chart {
-    position: absolute;
+    position: relative;
     width: 500px;
     height: 500px;
-    top: 90px;
+    top: 0px;
 }
 
 #chartTitle {
@@ -30,10 +30,11 @@ body {
     font-family: 'IBM Plex Sans', sans-serif, BeonMedium, 'Times New Roman', Times, serif;
     font-size: 20px;
     font-weight: bolder;
-    color: white;
+    color: rgb(124, 124, 124);
 }
 
 #chartData {
+    visibility: hidden;
     position: absolute;
     width: 500px;
     height: 64px;

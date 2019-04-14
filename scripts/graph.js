@@ -147,7 +147,7 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 99, 132, 0.0)'
             ],
             borderColor: [
-                'red'
+                'rgb(180, 0, 255)'
             ],
             borderWidth: 3
         }]
@@ -163,7 +163,7 @@ var myChart = new Chart(ctx, {
             xAxes: [{
                 ticks: {
                     padding: 4,
-                    fontColor: 'crimson',
+                    fontColor: 'rgb(180, 0, 255)',
                     fontFamily: 'Lucida Console',
                     beginAtZero: true,
                     min: 0
@@ -175,9 +175,8 @@ var myChart = new Chart(ctx, {
             }],
             yAxes: [{
                 ticks: {
-                    beginAtZero: true,
-                    max: 100,
-                    fontColor: 'crimson',
+                    min: 0,
+                    fontColor: 'rgb(180, 0, 255)',
                     fontFamily: 'Lucida Console'
                 }
             }]
