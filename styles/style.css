@@ -74,6 +74,7 @@ body {
 
 #playerData {
     position: absolute;
+    visibility: hidden;
     top: 0px;
     left: 17.395%;
     width: 300px;

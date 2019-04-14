@@ -3,7 +3,7 @@ let socket;
 const graph = (() => {
     var main = document.getElementById('chartContainer');
     var numberOfTimes = 0;
-    var player = prompt('Enter your in game name', 'TFizz')
+    //var player = prompt('Enter your in game name', 'TFizz')
 
     const performance = (() => {
         var score = document.getElementById('score');
@@ -175,7 +175,7 @@ var myChart = new Chart(ctx, {
             }],
             yAxes: [{
                 ticks: {
-                    min: 0,
+                    max: 100,
                     fontColor: 'rgb(180, 0, 255)',
                     fontFamily: 'Lucida Console'
                 }
