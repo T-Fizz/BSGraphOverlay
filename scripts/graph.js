@@ -2,15 +2,26 @@ let socket;
 
 const graph = (() => {
     var main = document.getElementById('chartContainer');
+    var numberOfTimes = 0;
 
     const performance = (() => {
         var score = document.getElementById('score');
+        var percentAcc;
         var accs = [];
 
         return {
             update(data) {
+                if (accs.length === numberOfTimes - 1) {
+                    if (isNaN(data.score / data.currentMaxScore)) {
+                        percentAcc = 100;
+                    } else {
+                        percentAcc = data.score / data.currentMaxScore
+                    }
+                    accs.push((score !== 0) ? (percentAcc) : 100);
+                }
                 totalScore = data.score;
-                accs.push((score !== 0) ? (data.score / data.currentMaxScore) : 100);
+                console.log(`Accuracy: ${percentAcc}`);
+                console.log(accs);
                 accs;
                 score.innerHTML = `Score: ${totalScore}`;
             },
@@ -29,7 +40,7 @@ const graph = (() => {
 
         function format(time) {
             var minutes = Math.floor(time / 60);
-            var seconds = time % 60;
+            var seconds = Math.round(time % 60);
             return (seconds > 10) ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
         }
 
@@ -51,9 +62,13 @@ const graph = (() => {
 
         return {
             push() {
-                console.log(display);
-                times.push(format(display))
-                console.log(format(display))
+                if (times[times.length - 1] !== format(display)) {
+                    times.push(format(display));
+                    numberOfTimes++;
+                }
+                console.log(format(display));
+                console.log(times);
+                console.log(`Last time recorded: ${(graph.timer.times === undefined || graph.timer.times.length == 0) ? 0 : graph.timer.times[times.length - 1]}`)
             },
             start(time, length) {
                 active = true;
@@ -71,6 +86,7 @@ const graph = (() => {
                 active = false;
                 start = undefined;
                 duration = undefined;
+                numberOfTimes = 0;
                 times = [];
             }
         }
@@ -129,7 +145,7 @@ var myChart = new Chart(ctx, {
                     padding: 4,
                     fontColor: 'rgb(220, 0, 0, 0.5)',
                     beginAtZero: true,
-                    max: (graph.performance.times === undefined) ? 0 : graph.performance.times[times.length - 1],
+                    max: (graph.timer.times === undefined || graph.timer.times.length == 0) ? 0 : graph.timer.times[times.length - 1],
                 },
                 gridLines: [{
                     drawTicks: true,
