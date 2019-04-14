@@ -14,10 +14,10 @@ const graph = (() => {
 
         return {
             update(data) {
-                if (accs.length <= numberOfTimes - 1 && data.passedNotes > 0) {
+                if (accs.length <= numberOfTimes - 1) {
                     if (isNaN(data.score / data.currentMaxScore)) {
                         console.log(`Current Score: ${data.score}\nCurrent Max Score: ${data.currentMaxScore}\nPercent: ${data.score / data.currentMaxScore * 100}`);
-                        percentAcc = 0;
+                        percentAcc = 100;
                     } else {
                         percentAcc = (data.score / data.currentMaxScore) * 100;
                     }
@@ -70,8 +70,8 @@ const graph = (() => {
             clear() {
                 times = [];
             },
-            push(data) {
-                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display) && data.passedNotes > 0) {
+            push() {
+                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display)) {
                     times.push(format(display));
                     myChart.data.labels = times;
                     myChart.update();

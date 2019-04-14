@@ -15,32 +15,32 @@ const events = {
     },
 
     finish(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     noteCut(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     noteFullyCut(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     obstacleEnter(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     noteMissed(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     bombCut(data, time) {
-        graph.timer.push(data.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
     },
 
