@@ -12,6 +12,11 @@ const graph = (() => {
         var percentAcc;
         var accs = [];
 
+        function rainbowShift() {
+
+        }
+
+
         return {
             update(data) {
                 if (accs.length <= numberOfTimes - 1) {
@@ -73,7 +78,7 @@ const graph = (() => {
             },
             push() {
                 //round off time and pushs at most once each second
-                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display) && round) {
+                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display) && !round) {
                     times.push(format(display));
                     myChart.data.labels = times;
                     myChart.update();
@@ -81,6 +86,9 @@ const graph = (() => {
                 } else if (myChart.data.labels[myChart.data.labels.length - 1] !== (display)) { //don't round off and don't limit push rate
                     times.push((display));
                     myChart.data.labels = times;
+                    if (rainbow) {
+
+                    }
                     myChart.update();
                     numberOfTimes++;
                 }
@@ -145,13 +153,20 @@ const graph = (() => {
         player
     }
 })();
+
 var defaultColor = 'white';
 
 var colorPick = prompt(`Please enter a color you would like your graph to be, default is ${defaultColor}\nSee readme for more info on color choices`, 'white');
-
-var lineColor = new RGBColor(colorPick).toHex();
-var xColor = lineColor;
-var yColor = lineColor;
+if (colorPick === 'rainbow') {
+    var rainbow = true;
+    var dynamicColor = new RGBColor('rgb(255,0,0)');
+} else {
+    var rainbow = false;
+    var staticColor = new RGBColor(colorPick).toHex();
+    var lineColor = staticColor;
+    var xColor = lineColor;
+    var yColor = lineColor;
+}
 
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -181,7 +196,7 @@ var myChart = new Chart(ctx, {
                     padding: 4,
                     fontColor: xColor,
                     fontFamily: 'Lucida Console',
-                    fontSize: 1,
+                    fontSize: 0,
                     beginAtZero: true,
                     min: 0
                 },
