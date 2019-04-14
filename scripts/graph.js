@@ -2,6 +2,7 @@ let socket;
 
 const graph = (() => {
     var main = document.getElementById('chartContainer');
+    //var numberOfAccs = 0;
     var numberOfTimes = 0;
     //var player = prompt('Enter your in game name', 'TFizz')
 

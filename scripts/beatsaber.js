@@ -9,19 +9,17 @@ const events = {
         graph.clear();
         graph.beatmap(data.beatmap, time);
         console.log(graph.performance);
-        graph.timer.push();
-        graph.performance.update(data.performance);
+        //graph.timer.push();
+        //graph.performance.update(data.performance);
         graph.show();
     },
 
     finish(data, time) {
-        console.log(graph.performance);
         graph.timer.push();
         graph.performance.update(data.performance);
     },
 
     noteCut(data, time) {
-        console.log(graph.performance);
         graph.timer.push();
         graph.performance.update(data.performance);
     },
