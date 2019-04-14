@@ -44,7 +44,7 @@ const graph = (() => {
         function format(time) {
             var minutes = Math.floor(time / 60);
             var seconds = Math.round(time % 60);
-            return (seconds > 10) ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
+            return (seconds >= 10) ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
         }
 
         function update(time) {
