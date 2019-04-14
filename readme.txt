@@ -11,3 +11,5 @@ fb0
 red
 darkblue
 cadet blue
+
+All CSS colors can be found here: https://www.quackit.com/css/css_color_codes.cfm
