@@ -141,9 +141,7 @@ var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        //labels: [],
         datasets: [{
-            //data: [],
             pointRadius: 0,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.0)'
@@ -165,7 +163,8 @@ var myChart = new Chart(ctx, {
             xAxes: [{
                 ticks: {
                     padding: 4,
-                    fontColor: 'rgb(220, 0, 0, 0.5)',
+                    fontColor: 'crimson',
+                    fontFamily: 'Lucida Console',
                     beginAtZero: true,
                     min: 0
                 },
@@ -178,7 +177,8 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     beginAtZero: true,
                     max: 100,
-                    fontColor: 'rgb(220, 0, 0, 0.8)'
+                    fontColor: 'crimson',
+                    fontFamily: 'Lucida Console'
                 }
             }]
         }
