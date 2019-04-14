@@ -56,3 +56,4 @@ const events = {
         graph.performance.clear();
     }
 };
+s

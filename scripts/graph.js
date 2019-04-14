@@ -51,7 +51,9 @@ const graph = (() => {
 
         return {
             push() {
-                times.push(format(duration));
+                console.log(display);
+                times.push(format(display))
+                console.log(format(display))
             },
             start(time, length) {
                 active = true;
@@ -82,8 +84,8 @@ const graph = (() => {
                 data.diffculty = "Expert+";
             }
             title.innerHTML = data.songName;
-            mapper.innerHTML = data.songSubname;
-            difficulty.innerHTML = data.diffculty;
+            mapper.innerHTML = data.songSubName;
+            difficulty.innerHTML = data.difficulty;
             timer.start(Date.now(), data.length);
         }
     })();
