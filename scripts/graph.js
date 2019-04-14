@@ -11,19 +11,22 @@ const graph = (() => {
 
         return {
             update(data) {
-                if (accs.length === numberOfTimes - 1) {
+                if (accs.length <= numberOfTimes - 1) {
                     if (isNaN(data.score / data.currentMaxScore)) {
+                        console.log(`Current Score: ${data.score}\nCurrent Max Score: ${data.currentMaxScore}\nPercent: ${data.score / data.currentMaxScore * 100}`);
                         percentAcc = 100;
                     } else {
-                        percentAcc = data.score / data.currentMaxScore
+                        percentAcc = (data.score / data.currentMaxScore) * 100;
                     }
-                    accs.push((score !== 0) ? (percentAcc) : 100);
+                    accs.push(percentAcc);
+                    myChart.data.datasets[0].data = accs;
                 }
                 totalScore = data.score;
-                console.log(`Accuracy: ${percentAcc}`);
                 console.log(accs);
-                accs;
+                console.log(myChart.data.datasets[0].data)
+                console.log(`Accuracy: ${percentAcc}`);
                 score.innerHTML = `Score: ${totalScore}`;
+                accs;
             },
             clear() {
                 accs = [];
@@ -61,14 +64,18 @@ const graph = (() => {
         }
 
         return {
+            clear() {
+                times = [];
+            },
             push() {
-                if (times[times.length - 1] !== format(display)) {
+                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display)) {
                     times.push(format(display));
+                    myChart.data.labels = times;
+                    myChart.update();
                     numberOfTimes++;
                 }
-                console.log(format(display));
                 console.log(times);
-                console.log(`Last time recorded: ${(graph.timer.times === undefined || graph.timer.times.length == 0) ? 0 : graph.timer.times[times.length - 1]}`)
+                console.log(myChart.data.labels);
             },
             start(time, length) {
                 active = true;
@@ -91,6 +98,7 @@ const graph = (() => {
             }
         }
     })();
+
     const beatmap = (() => {
         var title = document.getElementById('chartTitle');
         var mapper = document.getElementById('mapper');
@@ -105,7 +113,14 @@ const graph = (() => {
             timer.start(Date.now(), data.length);
         }
     })();
+
     return {
+        clear() {
+            myChart.data.labels = [];
+            myChart.data.datasets[0].data = [];
+            this.performance.clear();
+            this.timer.clear();
+        },
         show() {
             main.style.display = 'block';
         },
@@ -122,9 +137,9 @@ var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: graph.timer.times,
+        //labels: [],
         datasets: [{
-            data: graph.performance.accs,
+            //data: [],
             pointRadius: 0,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.0)'
@@ -145,11 +160,11 @@ var myChart = new Chart(ctx, {
                     padding: 4,
                     fontColor: 'rgb(220, 0, 0, 0.5)',
                     beginAtZero: true,
-                    max: (graph.timer.times === undefined || graph.timer.times.length == 0) ? 0 : graph.timer.times[times.length - 1],
+                    min: 0
                 },
                 gridLines: [{
                     drawTicks: true,
-                    display: false,
+                    display: false
                 }],
             }],
             yAxes: [{

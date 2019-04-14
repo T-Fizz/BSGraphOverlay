@@ -6,56 +6,49 @@ const events = {
     },
     songStart(data, time) {
         console.log(data);
+        graph.clear();
         graph.beatmap(data.beatmap, time);
         console.log(graph.performance);
+        graph.timer.push();
         graph.performance.update(data.performance);
-        console.log(graph.timer.push());
-        graph.timer.push()
         graph.show();
     },
 
     finish(data, time) {
         console.log(graph.performance);
-        graph.performance.update(data.performance);
         graph.timer.push();
+        graph.performance.update(data.performance);
     },
 
     noteCut(data, time) {
         console.log(graph.performance);
-        graph.performance.update(data.performance);
         graph.timer.push();
-        console.log(`Arrays outside:`);
-        console.log(graph.timer.times);
-        console.log(graph.performance.accs);
-        console.log(`End`);
+        graph.performance.update(data.performance);
     },
 
     noteFullyCut(data, time) {
-        graph.performance.update(data.performance);
         graph.timer.push();
-        console.log(`Arrays outside:`);
-        console.log(graph.timer.times);
-        console.log(graph.performance.accs);
-        console.log(`End`);
+        graph.performance.update(data.performance);
     },
 
     obstacleEnter(data, time) {
-        graph.performance.update(data.performance);
         graph.timer.push();
+        graph.performance.update(data.performance);
     },
 
     noteMissed(data, time) {
-        graph.performance.update(data.performance);
         graph.timer.push();
+        graph.performance.update(data.performance);
     },
 
     bombCut(data, time) {
-        graph.performance.update(data.performance);
         graph.timer.push();
+        graph.performance.update(data.performance);
     },
 
     pause(data, time) {
         graph.timer.pause(data.beatmap.paused + (Date.now() - time));
+        console.log(myChart);
     },
 
     resume(data, time) {
