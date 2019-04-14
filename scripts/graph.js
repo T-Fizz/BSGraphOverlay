@@ -3,6 +3,7 @@ let socket;
 const graph = (() => {
     var main = document.getElementById('chartContainer');
     var numberOfTimes = 0;
+    var player = prompt('Enter your in game name', 'TFizz')
 
     const performance = (() => {
         var score = document.getElementById('score');
@@ -101,6 +102,7 @@ const graph = (() => {
 
     const beatmap = (() => {
         var title = document.getElementById('chartTitle');
+        var subtitle = document.getElementById('subTitle');
         var mapper = document.getElementById('mapper');
         var difficulty = document.getElementById('difficulty');
         return (data, time) => {
@@ -108,7 +110,8 @@ const graph = (() => {
                 data.diffculty = "Expert+";
             }
             title.innerHTML = data.songName;
-            mapper.innerHTML = data.songSubName;
+            subtitle.innerHTML = data.songSubName;
+            mapper.innerHTML = data.songAuthorName;
             difficulty.innerHTML = data.difficulty;
             timer.start(Date.now(), data.length);
         }
@@ -129,7 +132,8 @@ const graph = (() => {
         },
         performance,
         timer,
-        beatmap
+        beatmap,
+        player
     }
 })();
 
@@ -151,6 +155,9 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+        animation: {
+            duration: 10
+        },
         legend: {
             display: false
         },
