@@ -178,19 +178,25 @@ const graph = (() => {
 })();
 
 var defaultColor = 'white';
-var limitAsk = confirm(`Press OK to limit graph (or press cancel)`);
-var colorPick = prompt(`Please enter a color you would like your graph to be, default is ${defaultColor}\nSee readme for more info on color choices`, 'white');
+var limitAsk = confirm(`Press OK to limit graph refresh rate to once per second (else press cancel)`);
+var colorPick = prompt(`Please enter a color you would like your graph to be`, 'white');
+var colorPicked = new RGBColor(colorPick);
+
 if (colorPick === 'rainbow') {
     var rainbow = true;
-    var dynamicColor = new RGBColor('rgb(255,255,255)');
-    lineColor = dynamicColor.toHex();
+    //var dynamicColor = new RGBColor('rgb(255,255,255)');
+    var lineColor = dynamicColor.toHex();
     console.log(`Rainbow mode activated!`);
+} else if (!colorPicked.ok) {
+    delete colorPicked;
+    var rainbow = false;
+    var lineColor = defaultColor;
 } else {
     var rainbow = false;
-    var staticColor = new RGBColor(colorPick).toHex();
-    var lineColor = staticColor;
+    var lineColor = colorPicked.toHex();
+    lineColor = 'white';
 }
-var lineColor = lineColor
+//var lineColor = lineColor
 var xColor = lineColor;
 var yColor = lineColor;
 
