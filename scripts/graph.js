@@ -187,7 +187,7 @@ var colorPicked = new RGBColor(colorPick);
 if (colorPick === 'rainbow') {
     var rainbow = true;
     //var dynamicColor = new RGBColor('rgb(255,255,255)');
-    var color = dynamicColor.toHex();
+    var color = '#ffffff';
     console.log(`Rainbow mode activated!`);
 } else if (!colorPicked.ok) {
     delete colorPicked;
