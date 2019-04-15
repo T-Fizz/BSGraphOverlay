@@ -16,9 +16,9 @@ body {
 
 #chart {
     position: relative;
-    width: 500px;
-    height: 500px;
-    top: 0px;
+    width: 550px;
+    height: 550px;
+    top: 10px;
 }
 
 #chartTitle {

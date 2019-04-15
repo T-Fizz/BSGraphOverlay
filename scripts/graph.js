@@ -6,16 +6,33 @@ const graph = (() => {
     var numberOfTimes = 0;
     //var player = prompt('Enter your in game name', 'TFizz')
 
+    const rainbowShift = (() => {
+        var frequency = .3;
+        var step = 0;
+        //
+        function changeHues() {
+            var i = step;
+            r = Math.sin(frequency * i + 0) * 127 + 128;
+            g = Math.sin(frequency * i + 2) * 127 + 128;
+            b = Math.sin(frequency * i + 4) * 127 + 128;
+            step = i + 1;
+        }
+        return () => {
+            changeHues();
+            console.log(`Before: rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`);
+            myChart.data.datasets[0].borderColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+            myChart.options.scales.xAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+            myChart.options.scales.yAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+            console.log(`After color change`);
+        }
+
+    })();
+
     const performance = (() => {
         var score = document.getElementById('score');
         //var isFirstHit = true;
         var percentAcc;
         var accs = [];
-
-        function rainbowShift() {
-
-        }
-
 
         return {
             update(data) {
@@ -28,6 +45,8 @@ const graph = (() => {
                     }
                     accs.push(percentAcc);
                     myChart.data.datasets[0].data = accs;
+                    rainbowShift();
+                    myChart.update();
                 }
                 totalScore = data.score;
                 console.log(accs);
@@ -89,7 +108,6 @@ const graph = (() => {
                     if (rainbow) {
 
                     }
-                    myChart.update();
                     numberOfTimes++;
                 }
                 console.log(times);
@@ -159,16 +177,19 @@ var defaultColor = 'white';
 var colorPick = prompt(`Please enter a color you would like your graph to be, default is ${defaultColor}\nSee readme for more info on color choices`, 'white');
 if (colorPick === 'rainbow') {
     var rainbow = true;
-    var dynamicColor = new RGBColor('rgb(255,0,0)');
+    var dynamicColor = new RGBColor('rgb(255,255,255)');
+    lineColor = dynamicColor.toHex();
+    console.log(`Rainbow mode activated!`);
 } else {
     var rainbow = false;
     var staticColor = new RGBColor(colorPick).toHex();
     var lineColor = staticColor;
-    var xColor = lineColor;
-    var yColor = lineColor;
 }
+var xColor = lineColor;
+var yColor = lineColor;
 
 var ctx = document.getElementById('myChart');
+
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {

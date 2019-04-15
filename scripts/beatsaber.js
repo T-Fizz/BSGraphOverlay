@@ -2,7 +2,6 @@ const events = {
     hello(data) {
         document.getElementById('player').innerHTML = graph.player;
         console.log(`Beat Saber (${data.game.gameVersion}) is connected!`);
-        console.log(name);
     },
     songStart(data, time) {
         console.log(data);
