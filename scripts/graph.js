@@ -64,7 +64,7 @@ const graph = (() => {
 
     const timer = (() => {
         var active = false;
-        var round = false;
+        var round = limitAsk;
         var times = [];
         var start;
         var duration;
@@ -174,7 +174,7 @@ const graph = (() => {
 })();
 
 var defaultColor = 'white';
-
+var limitAsk = confirm(`Press OK to limit graph (or press cancel)`);
 var colorPick = prompt(`Please enter a color you would like your graph to be, default is ${defaultColor}\nSee readme for more info on color choices`, 'white');
 if (colorPick === 'rainbow') {
     var rainbow = true;
