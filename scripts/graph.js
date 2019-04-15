@@ -180,7 +180,7 @@ const graph = (() => {
 })();
 
 var defaultColor = 'white';
-var limitAsk = confirm(`Do you want to limit the graphing rate?\n(if no press cancel)`);
+var limitAsk = false; //confirm(`Do you want to limit the graphing rate?\n(if no press cancel)`);
 var colorPick = prompt(`Please enter a color you would like your graph to be`, 'white');
 var colorPicked = new RGBColor(colorPick);
 
