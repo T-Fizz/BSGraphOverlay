@@ -32,6 +32,7 @@ const graph = (() => {
         var score = document.getElementById('score');
         //var isFirstHit = true;
         var percentAcc;
+        var notesMissed = 0;
         var accs = [];
 
         return {
@@ -185,6 +186,7 @@ if (colorPick === 'rainbow') {
     var staticColor = new RGBColor(colorPick).toHex();
     var lineColor = staticColor;
 }
+var lineColor = lineColor
 var xColor = lineColor;
 var yColor = lineColor;
 
@@ -202,9 +204,24 @@ var myChart = new Chart(ctx, {
                 lineColor
             ],
             borderWidth: 3
-        }]
+        }],
+        /*
+            {
+                pointRadius: 0,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.0)'
+                ],
+                borderColor: [
+                    lineColor
+                ],
+                borderWidth: 3
+            }
+        ],
+        */
     },
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         animation: {
             duration: 10
         },
