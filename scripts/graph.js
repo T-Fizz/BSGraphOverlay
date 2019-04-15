@@ -231,7 +231,7 @@ var myChart = new Chart(ctx, {
                     max: 100,
                     fontColor: yColor,
                     fontFamily: 'Lucida Console',
-                    fontSize: 14
+                    fontSize: 20
                 }
             }]
         }
