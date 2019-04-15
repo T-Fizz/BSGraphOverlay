@@ -22,7 +22,9 @@ const graph = (() => {
             step = i + 1;
         }
         return () => {
-            changeHues();
+            if (rainbow) {
+                changeHues();
+            }
             console.log(`Before: rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`);
             myChart.data.datasets[0].borderColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
             //myChart.options.scales.xAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
@@ -178,25 +180,24 @@ const graph = (() => {
 })();
 
 var defaultColor = 'white';
-var limitAsk = confirm(`Press OK to limit graph refresh rate to once per second (else press cancel)`);
+var limitAsk = confirm(`Do you want to limit the graphing rate?\n(if no press cancel)`);
 var colorPick = prompt(`Please enter a color you would like your graph to be`, 'white');
 var colorPicked = new RGBColor(colorPick);
 
 if (colorPick === 'rainbow') {
     var rainbow = true;
     //var dynamicColor = new RGBColor('rgb(255,255,255)');
-    var lineColor = dynamicColor.toHex();
+    var color = dynamicColor.toHex();
     console.log(`Rainbow mode activated!`);
 } else if (!colorPicked.ok) {
     delete colorPicked;
     var rainbow = false;
-    var lineColor = defaultColor;
+    var color = defaultColor;
 } else {
     var rainbow = false;
-    var lineColor = colorPicked.toHex();
-    lineColor = 'white';
+    var color = colorPicked.toHex();
 }
-//var lineColor = lineColor
+var lineColor = color;
 var xColor = lineColor;
 var yColor = lineColor;
 
