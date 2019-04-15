@@ -1,4 +1,4 @@
-This is an overlay for Beat Saber. Once the page is loaded, you will be prompted to enter in your name to display (or leave empty to display nothing). If the page is opened in a browser you can just hover over a data point and itll give you the x, y data. 
+This is an overlay for Beat Saber that graphs your percent accuracy as you play (%Accuracy vs. Time). Once the page is loaded, you will be prompted to enter in your name to display (or leave empty to display nothing). If the page is opened in a browser you can just hover over a data point and itll give you the x, y data. 
 
 To use this overlay in OBS, copy this link and add as a browser source: http://t-fizz.github.io/BSGraphOverlay/
 or you can just load it into a browser and inspect after the song finishes as the graph won't reset until a new song starts.
