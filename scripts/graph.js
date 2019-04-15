@@ -21,8 +21,8 @@ const graph = (() => {
             changeHues();
             console.log(`Before: rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`);
             myChart.data.datasets[0].borderColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
-            myChart.options.scales.xAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
-            myChart.options.scales.yAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+            //myChart.options.scales.xAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+            //myChart.options.scales.yAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
             console.log(`After color change`);
         }
 
