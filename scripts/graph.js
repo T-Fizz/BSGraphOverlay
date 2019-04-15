@@ -11,7 +11,11 @@ const graph = (() => {
         var step = 0;
         //
         function changeHues() {
-            var i = step;
+            if (step < 10000) {
+                var i = step;
+            } else {
+                var i = 0;
+            }
             r = Math.sin(frequency * i + 0) * 127 + 128;
             g = Math.sin(frequency * i + 2) * 127 + 128;
             b = Math.sin(frequency * i + 4) * 127 + 128;
