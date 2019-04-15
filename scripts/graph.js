@@ -112,9 +112,6 @@ const graph = (() => {
                 } else if (myChart.data.labels[myChart.data.labels.length - 1] !== (display)) { //don't round off and don't limit push rate
                     times.push((display));
                     myChart.data.labels = times;
-                    if (rainbow) {
-
-                    }
                     numberOfTimes++;
                 }
                 console.log(times);
@@ -183,6 +180,12 @@ var defaultColor = 'white';
 var limitAsk = false; //confirm(`Do you want to limit the graphing rate?\n(if no press cancel)`);
 var colorPick = prompt(`Please enter a color you would like your graph to be`, 'white');
 var colorPicked = new RGBColor(colorPick);
+do {
+    var wantsBorder = prompt(`Do you want a border around the graph?\nEnter "yes" or "no"`, 'no');
+} while (wantsBorder != 'yes' && wantsBorder != null && wantsBorder != 'no');
+if (wantsBorder === 'yes') {
+    document.getElementById('chart').style.border = `2px solid ${colorPicked.toHex()}`
+}
 
 if (colorPick === 'rainbow') {
     var rainbow = true;
@@ -259,7 +262,7 @@ var myChart = new Chart(ctx, {
                     max: 100,
                     fontColor: yColor,
                     fontFamily: 'Lucida Console',
-                    fontSize: 20
+                    fontSize: 24
                 }
             }]
         }
