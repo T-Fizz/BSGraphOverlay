@@ -54,11 +54,10 @@ const graph = (() => {
         return {
             update(data) {
                 //if (accs.length < numberOfTimes + 1) {
-                if (isNaN(data.score / data.currentMaxScore)) {
+                percentAcc = data.score / data.currentMaxScore * 100;
+                if (isNaN(percentAcc)) {
                     console.log(`Current Score: ${data.score}\nCurrent Max Score: ${data.currentMaxScore}\nPercent: ${data.score / data.currentMaxScore * 100}`);
                     percentAcc = 100;
-                } else {
-                    percentAcc = (data.score / data.currentMaxScore) * 100;
                 }
                 accs.push(percentAcc);
                 numberOfAccs++;
@@ -67,7 +66,7 @@ const graph = (() => {
                 myChart.update();
                 //}
                 totalScore = data.score;
-                console.log(accs);
+                //console.log(accs);
                 console.log(myChart.data.datasets[0].data)
                 console.log(`Accuracy: ${percentAcc}`);
                 score.innerHTML = `Score: ${totalScore}`;
@@ -128,7 +127,7 @@ const graph = (() => {
                     myChart.data.labels = times;
                     //numberOfTimes++;
                 }
-                console.log(times);
+                //console.log(times);
                 console.log(myChart.data.labels);
             },
             start(time, length) {
