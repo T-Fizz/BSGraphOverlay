@@ -8,39 +8,46 @@ const events = {
         graph.clear();
         graph.beatmap(data.beatmap, time);
         console.log(graph.performance);
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
         graph.show();
     },
 
     finish(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     noteCut(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     noteFullyCut(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     obstacleEnter(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     noteMissed(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     bombCut(data, time) {
-        graph.timer.push();
+        //graph.timer.push();
         graph.performance.update(data.performance);
+        graph.timer.push();
     },
 
     pause(data, time) {
