@@ -2,14 +2,17 @@ let socket;
 
 const graph = (() => {
     var main = document.getElementById('chartContainer');
-    //var numberOfAccs = 0;
+    var numberOfAccs = 0;
     var numberOfTimes = 0;
     //var player = prompt('Enter your in game name', 'TFizz')
 
     const rainbowShift = (() => {
         var frequency = .3;
         var step = 0;
-        //
+        var r;
+        var g;
+        var b;
+
         function changeHues() {
             if (step < 10000) {
                 var i = step;
@@ -20,11 +23,18 @@ const graph = (() => {
             g = Math.sin(frequency * i + 2) * 127 + 128;
             b = Math.sin(frequency * i + 4) * 127 + 128;
             step = i + 1;
+            myChart.data.datasets[0].borderColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
+        }
+
+        function setHues(red, green, blue) {
+            return () => {
+                r = red;
+                g = green;
+                b = blue;
+            }
         }
         return () => {
-            if (rainbow) {
-                changeHues();
-            }
+            changeHues();
             console.log(`Before: rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`);
             myChart.data.datasets[0].borderColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
             //myChart.options.scales.xAxes[0].ticks.fontColor = `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
@@ -43,18 +53,19 @@ const graph = (() => {
 
         return {
             update(data) {
-                if (accs.length <= numberOfTimes - 1) {
-                    if (isNaN(data.score / data.currentMaxScore)) {
-                        console.log(`Current Score: ${data.score}\nCurrent Max Score: ${data.currentMaxScore}\nPercent: ${data.score / data.currentMaxScore * 100}`);
-                        percentAcc = 100;
-                    } else {
-                        percentAcc = (data.score / data.currentMaxScore) * 100;
-                    }
-                    accs.push(percentAcc);
-                    myChart.data.datasets[0].data = accs;
-                    rainbowShift();
-                    myChart.update();
+                //if (accs.length < numberOfTimes + 1) {
+                if (isNaN(data.score / data.currentMaxScore)) {
+                    console.log(`Current Score: ${data.score}\nCurrent Max Score: ${data.currentMaxScore}\nPercent: ${data.score / data.currentMaxScore * 100}`);
+                    percentAcc = 100;
+                } else {
+                    percentAcc = (data.score / data.currentMaxScore) * 100;
                 }
+                accs.push(percentAcc);
+                numberOfAccs++;
+                myChart.data.datasets[0].data = accs;
+                if (rainbow) { rainbowShift() };
+                myChart.update();
+                //}
                 totalScore = data.score;
                 console.log(accs);
                 console.log(myChart.data.datasets[0].data)
@@ -103,16 +114,19 @@ const graph = (() => {
                 times = [];
             },
             push() {
+                /*
                 //round off time and pushs at most once each second
-                if (myChart.data.labels[myChart.data.labels.length - 1] !== format(display) && !round) {
+                if (times[times - 1] !== format(display) && round) {
                     times.push(format(display));
                     myChart.data.labels = times;
                     myChart.update();
                     numberOfTimes++;
-                } else if (myChart.data.labels[myChart.data.labels.length - 1] !== (display)) { //don't round off and don't limit push rate
+                */
+                //} else 
+                if (times.length < numberOfAccs) { //don't round off and don't limit push rate
                     times.push((display));
                     myChart.data.labels = times;
-                    numberOfTimes++;
+                    //numberOfTimes++;
                 }
                 console.log(times);
                 console.log(myChart.data.labels);
@@ -194,12 +208,14 @@ if (colorPick === 'rainbow') {
     console.log(`Rainbow mode activated!`);
 } else if (!colorPicked.ok) {
     delete colorPicked;
+    var colorPicked = new RGBColor('white');
     var rainbow = false;
     var color = defaultColor;
 } else {
     var rainbow = false;
     var color = colorPicked.toHex();
 }
+
 var lineColor = color;
 var xColor = lineColor;
 var yColor = lineColor;
