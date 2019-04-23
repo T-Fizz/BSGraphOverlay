@@ -20,11 +20,13 @@ const events = {
         graph.timer.push();
     },
 
+    /*
     noteCut(data, time) {
         //graph.timer.push();
         graph.performance.update(data.performance);
         graph.timer.push();
     },
+    */
 
     noteFullyCut(data, time) {
         //graph.timer.push();
