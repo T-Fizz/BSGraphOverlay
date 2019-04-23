@@ -18,7 +18,6 @@ body {
     position: relative;
     padding: 10px 10px 10px 10px;
     height: 93vh;
-    border-bottom: 4px solid rgb(0, 217, 255);
 }
 
 #chartTitle {
